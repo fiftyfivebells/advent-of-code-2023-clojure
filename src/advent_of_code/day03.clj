@@ -33,11 +33,12 @@
                :when (is-part-adjacent? matrix row col max-y max-x num)]
            num))))
 
-(defn day-3-part-1
+(defn day-03-part-1
   "Using the puzzle input, it creates the matrix and number locations, then finds
   all of the numbers with adjacent parts, and adds the list of numbers."
   [input]
-  (let [matrix    (u/to-matrix input)
+  (let [input     (u/read-file input)
+        matrix    (u/to-matrix input)
         locations (get-number-locations input)]
     (reduce + (get-part-adjacent-numbers matrix locations))))
 
@@ -75,16 +76,17 @@
   (let [gear-map (filter #(= 2 (count %)) (vals gears))]
     (map #(* (first (first %)) (first (second %))) gear-map)))
 
-(defn day-3-part-2
+(defn day-03-part-2
   "Turns the puzzle input into a matrix and list of locations, finds all the gears,
   calculates all the gear ratios, and then adds the list of ratios together."
   [input]
-  (let [matrix    (u/to-matrix input)
+  (let [input     (u/read-file input)
+        matrix    (u/to-matrix input)
         locations (get-number-locations input)]
     (->>
      (find-all-gears matrix locations)
      calculate-ratios
      (reduce +))))
 
-(day-3-part-1 input)
-(day-3-part-2 input)
+(day-03-part-1 input)
+(day-03-part-2 input)

@@ -55,7 +55,7 @@
 (defn day-10-part-1
   [input]
   (->>
-   input
+   (u/read-file input)
    u/to-matrix
    build-graph
    bfs
@@ -92,7 +92,8 @@
 
 (defn day-10-part-2
   [input]
-  (let [matrix  (u/to-matrix input)
+  (let [input   (u/read-file input)
+        matrix  (u/to-matrix input)
         graph   (build-graph matrix)
         visited (bfs graph)]
     (reduce + (map #(count-enclosed (apply str %)) (remove-unvisited visited matrix)))))

@@ -3,23 +3,29 @@
    [clojure.java.io :as io]
    [clojure.string :as str]))
 
+(defn read-file
+  [filename]
+  (slurp (io/resource filename)))
+
 (defn to-blocks
   [input]
-  (str/split
-   (slurp (io/resource input)) #"\n\n"))
+  (str/split input #"\n\n"))
 
 (defn to-lines
   [input]
-  (str/split-lines
-   (slurp (io/resource input))))
+  (str/split-lines input))
 
 (defn to-matrix
   "Takes in string of lines and turns it into a matrix, with each character in its own index"
   [input]
-  (->>
-   input
-   to-lines
-   (mapv vec)))
+  (->> input
+       to-lines
+       (mapv vec)))
+
+(defn transpose-matrix
+  "Basic matrix transpose operation: flips a matrix so its rows become its columns."
+  [matrix]
+  (apply mapv vector matrix))
 
 (defn valid-coord?
   "Checks that the given coordinates into a matrix are "
@@ -40,5 +46,6 @@
       (reverse res))))
 
 (defn strings->longs
+  "Takes a list of strings and parses it into a list of longs using regex, so it will remove non-numeric characters."
   [los]
   (map parse-long (re-seq #"[-+]?\d+" los)))

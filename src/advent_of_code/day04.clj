@@ -23,12 +23,13 @@
 (defn day-4-part-1
   [input]
   (->>
-   (u/to-lines input)
+   (u/read-file input)
+   u/to-lines
    (map card->num-pairs)
    (map get-matching-numbers-count)
    (filter pos?)
    (map dec)  ;; this fixes the problem of not doubling the first win
-   (map #(math/pow 2 %))  
+   (map #(math/pow 2 %))
    (reduce +)))
 
 (defn update-card-totals
@@ -57,7 +58,8 @@
 (defn day-4-part-2
   [input]
   (->>
-   (u/to-lines input)
+   (u/read-file input)
+   u/to-lines
    (mapv card->num-pairs)
    count-of-cards))
 

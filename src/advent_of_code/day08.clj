@@ -3,6 +3,8 @@
    [clojure.string :as str]
    [advent-of-code.utils :as u]))
 
+(def input "day08.txt")
+
 (defn node->map
   [node-map node]
   (let [[key vals] (str/split node #" = ")]
@@ -36,14 +38,12 @@
       count
       (recur ds ((choose-direction d) (network key)) (inc count)))))
 
-(defn day-8-part-1
+(defn day-08-part-1
   [input]
   (->>
-   input
+   (u/read-file input)
    (directions-and-network)
    travel))
-
-(day-8-part-1 "day08.txt")
 
 (defn least-common-multiple
   [a b]
@@ -66,5 +66,11 @@
         ends  (set (filter #(= \Z (last %)) (keys network)))]
     (reduce least-common-multiple (map #(walk-one-path % ends dirs network) starts))))
 
-(def result
-  (ghost-travel (directions-and-network "day08.txt")))
+(defn day-08-part-2
+  [input]
+  (->> (u/read-file input)
+       directions-and-network
+       ghost-travel))
+
+(day-08-part-1 input)
+(day-08-part-2 input)

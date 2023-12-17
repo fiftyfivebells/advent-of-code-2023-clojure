@@ -10,9 +10,10 @@
   [line]
   (str (first line) (last line)))
 
-(defn day-1-part-1
+(defn day-01-part-1
   [filename]
-  (->> (u/to-lines filename)
+  (->> (u/read-file filename)
+       u/to-lines 
        (map remove-letters)
        (map get-first-and-last)
        (map #(Integer/parseInt %))
@@ -38,15 +39,16 @@
      line
      (keys digits))))
 
-(defn day-1-part-2
+(defn day-01-part-2
   [filename]
   (->>
-   (u/to-lines filename)
+   (u/read-file filename)
+   u/to-lines 
    (map replace-words-with-nums)
    (map remove-letters)
    (map get-first-and-last)
    (map parse-long)
    (reduce +)))
 
-(day-1-part-1 "day01.txt")
-(day-1-part-2 "day01.txt")
+(day-01-part-1 "day01.txt")
+(day-01-part-2 "day01.txt")

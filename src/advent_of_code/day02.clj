@@ -45,7 +45,8 @@
   )"
   [input]
   (->>
-   (u/to-lines input)
+   (u/read-file input)
+   u/to-lines
    (map remove-game-from-line)
    (map game->rounds)
    (map round->pairs)

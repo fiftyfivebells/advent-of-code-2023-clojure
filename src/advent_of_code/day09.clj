@@ -25,7 +25,7 @@
 (defn day-09-part-1
   [input]
   (->>
-   input
+   (u/read-file input)
    u/to-lines
    (map u/strings->longs)
    (map history-projection)
@@ -35,7 +35,7 @@
 (defn day-09-part-2
   [input]
   (->>
-   input
+   (u/read-file input)
    u/to-lines
    (map u/strings->longs)
    (map reverse)

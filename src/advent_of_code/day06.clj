@@ -1,7 +1,5 @@
 (ns advent-of-code.day06
-  (:require
-   [clojure.string :as str]
-   [advent-of-code.utils :as u]))
+  (:require [advent-of-code.utils :as u]))
 
 (def input "day06.txt")
 
@@ -28,7 +26,8 @@
 (defn day-6-part-1
   [input]
   (->>
-   (u/to-lines input)
+   (u/read-file input)
+   u/to-lines
    (map #(u/strings->longs %))
    (zip-input-list)
    (map get-record-breakers)
@@ -44,7 +43,8 @@
   the list into the two final numbers."
   [input]
   (->>
-   (u/to-lines input)
+   (u/read-file input)
+   u/to-lines
    (map #(re-seq #"\d+" %))
    (map #(reduce str %))
    (map #(u/strings->longs %))

@@ -70,7 +70,7 @@
 
 (defn day-11
   [input multiplier]
-  (->> input
+  (->> (u/read-file input)
        u/to-matrix
        (find-all-shortest-paths multiplier)
        (reduce +)))

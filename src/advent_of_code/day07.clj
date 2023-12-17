@@ -104,7 +104,8 @@
 (defn day-07-part-1
   [input]
   (->>
-   (u/to-lines input)
+   (u/read-file input)
+   u/to-lines
    parse-hands
    rank-hands-by-type
    score-all-hands
@@ -113,7 +114,8 @@
 (defn day-07-part-2
   [input]
   (->>
-   (u/to-lines input)
+   (u/read-file input)
+   u/to-lines
    (map #(str/replace % \J \X))
    parse-hands
    rank-hands-by-type
